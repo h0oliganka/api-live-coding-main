@@ -82,9 +82,6 @@ export function postComments({ nameInputElement, commentInputElement, token }) {
     body: JSON.stringify({
       name: nameInputElement.value,
       text: commentInputElement.value,
-      date: newDate(),
-      likesCounter: 0,
-      forceError: true,
     }),
     headers: {
       Authorization: token,
@@ -106,7 +103,6 @@ export function loginUser({ login, password, token }) {
     body: JSON.stringify({
       login,
       password,
-      token,
     })
   }).then((response) => {
     if (response.status === 400) {
@@ -122,8 +118,8 @@ export function registerUser({ name, login, password, token }) {
   return fetch("https://webdev-hw-api.vercel.app/api/user", {
     method: "POST",
     body: JSON.stringify({
-      login: name,
       login,
+      name,
       password,
       token,
     })
