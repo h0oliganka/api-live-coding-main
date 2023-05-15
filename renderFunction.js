@@ -129,27 +129,22 @@ export const renderComments = () => {
         .replaceAll('"', "&quot;"),
       likesCounter: 0,
     });
-    // addForm.parentNode.appendChild(addFormLoading, addForm);
 
     // POST
     const postAndRenderComments = () => {
-      // addForm.parentNode.appendChild(addFormLoading, addForm);
-
       return postComments({ nameInputElement, commentInputElement })
         .then(() => {
-          // return addFormLoading.parentNode.appendChild(addForm, addFormLoading);
-        })
-        .then(() => {
           return fetchAndRenderCommentsTwo();
-
-        }).then(() => {
-          if (response.status === 500) {
+        }).catch((error) => {
+          if (response.status === 201) {
+          }
+            if (response.status === 500) {
             alert('Сервер сломался, попробуй позже');
             throw new Error('Сервер сломался, попробуй позже');
           } 
-          // return addFormLoading.parentNode.appendChild(addForm, addFormLoading);
-        }).catch((error) => {
-          // addFormLoading.parentNode.appendChild(addForm, addFormLoading);
+            if (response.status === 400) {
+            alert("Имя и комментарий должны быть не короче 3 символов");
+          } 
           console.warn(error);
         });
     }

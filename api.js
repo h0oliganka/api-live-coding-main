@@ -90,14 +90,10 @@ export function postComments({ nameInputElement, commentInputElement, token }) {
       Authorization: token,
     },
   }).then((response) => {
-    if (response.status === 201) {
-      return response.json();
-    }
-      if (response.status === 500) {
+    if (response.status === 500) {
       alert('Сервер сломался, попробуй позже');
-      throw new Error('Сервер сломался, попробуй позже');
-    } 
-      if (response.status === 400) {
+    }
+    if (response.status === 400) {
       alert("Имя и комментарий должны быть не короче 3 символов");
     }
   })
